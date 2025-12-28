@@ -1,0 +1,59 @@
+<!DOCTYPE html>
+<html lang="ko">
+<head>
+    <meta charset="UTF-8">
+    <title>Calc API 테스트</title>
+</head>
+<body>
+
+<h2>Calc API 화면</h2>
+
+<label>
+    a :
+    <input type="number" id="a" value="3">
+</label>
+<br><br>
+
+<label>
+    b :
+    <input type="number" id="b" value="4">
+</label>
+<br><br>
+
+<button onclick="callApi()">계산하기</button>
+
+<h3>결과</h3>
+<pre id="result">-</pre>
+<script>
+    function callApi() {
+      const a = document.getElementById("a").value;
+      const b = document.getElementById("b").value;
+
+      fetch(`/api/calc?a=${a}&b=${b}`)
+        .then(async (res) => {
+          const text = await res.text(); // ✅ 일단 문자열로 받기
+          if (!res.ok) {
+            throw new Error(`HTTP ${res.status}\n${text}`);
+          }
+
+          // ✅ JSON이면 파싱, 아니면 그대로 보여줌
+          try {
+            const data = JSON.parse(text);
+            document.getElementById("result").textContent =
+              "합(sum): " + data.sum + "\n" +
+              "곱(multiply): " + data.multiply;
+          } catch (e) {
+            // 여기 오면 HTML이 온 거임
+            document.getElementById("result").textContent =
+              "JSON이 아니라 이게 왔어:\n" + text;
+          }
+        })
+        .catch(err => {
+          document.getElementById("result").textContent = "에러:\n" + err;
+        });
+    }
+</script>
+
+
+</body>
+</html>
