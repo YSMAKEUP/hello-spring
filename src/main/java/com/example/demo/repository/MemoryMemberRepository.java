@@ -13,8 +13,8 @@ public class MemoryMemberRepository implements MemberRepository {
 
     @Override
     public Member save(Member member) {
-        member.setId(++sequence);
-        store.put(member.getId(),member);
+        member.setId(++sequence); //멤버에 대한 setid에 대한 차례를 + 시킴
+        store.put(member.getId(),member); //
         return member;
     }
 
@@ -33,5 +33,9 @@ public class MemoryMemberRepository implements MemberRepository {
     @Override
     public List<Member> findAll() {
         return new ArrayList<>(store.values());
+    }
+
+    public void clearstore(){
+        store.clear();
     }
 }
