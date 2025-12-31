@@ -10,7 +10,7 @@ import java.util.Optional;
 public class Memberservice {
     private final MemberRepository memberRepository = new MemoryMemberRepository();
 
-
+    //회원가입
     public Long join (Member member){
         //같은 이름이 있는지 중복 회원 x
         validdateDuplicateMember(member);
@@ -21,7 +21,11 @@ public class Memberservice {
     private void validdateDuplicateMember(Member member) {
         memberRepository.findByName(member.getName())
                 .ifPresent(m-> {
+                    try {
                         throw new IllegalAccessException("이미 있는데?");
+                    } catch (IllegalAccessException e) {
+                        throw new RuntimeException(e);
+                    }
                 });
     }
 
