@@ -1,10 +1,11 @@
 package com.example.demo.repository;
 
 import com.example.demo.domain.Member;
+import org.springframework.stereotype.Repository;
 
 import java.util.*;
 
-
+@Repository
 //MemberRepository를 상속 받겠다 .
 public class MemoryMemberRepository implements MemberRepository {
 

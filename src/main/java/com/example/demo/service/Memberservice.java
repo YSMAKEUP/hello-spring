@@ -3,13 +3,20 @@ package com.example.demo.service;
 import com.example.demo.domain.Member;
 import com.example.demo.repository.MemberRepository;
 import com.example.demo.repository.MemoryMemberRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class Memberservice {
-    private final MemberRepository memberRepository = new MemoryMemberRepository();
+    private final MemberRepository memberRepository;
 
+    @Autowired
+    public Memberservice(MemberRepository memberRepository){
+        this.memberRepository = memberRepository;
+    }
     //회원가입
     public Long join (Member member){
         //같은 이름이 있는지 중복 회원 x

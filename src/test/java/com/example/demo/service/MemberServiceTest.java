@@ -22,7 +22,7 @@ public class MemberServiceTest {
     @BeforeEach
     public void beforeEach(){
         memberRepository = new MemoryMemberRepository();
-        memberService = new Memberservice();
+//        memberService = new Memberservice();
     }
 
     @AfterEach
