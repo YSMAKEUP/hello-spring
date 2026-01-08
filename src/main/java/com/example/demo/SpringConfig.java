@@ -1,7 +1,8 @@
 package com.example.demo;
+import com.example.demo.repository.*;
 
-import com.example.demo.repository.JdbcTemplateMemberRepository;
 import com.example.demo.service.Memberservice;
+import jakarta.persistence.EntityManager;
 import org.springframework.context.annotation.Bean;
 import org.springframework.context.annotation.Configuration;
 
@@ -12,9 +13,11 @@ import javax.sql.DataSource;
 @Configuration
 public class SpringConfig{
         private final DataSource dataSource;
+        private final EntityManager em;
 
-        public SpringConfig(DataSource dataSource){
+        public SpringConfig(DataSource dataSource, EntityManager em){
             this.dataSource = dataSource;
+            this.em = em;
         }
 
     @Bean
@@ -24,8 +27,9 @@ public class SpringConfig{
 
     @Bean
     public JdbcTemplateMemberRepository memberRepository(){
-//        return new MemoryMemberRepository();
-         return new JdbcTemplateMemberRepository(dataSource);
+////        return new MemoryMemberRepository();
+//         return new JdbcTemplateMemberRepository(dataSource);
+        return new JpaMemberRepository(em);
     }
 
 }

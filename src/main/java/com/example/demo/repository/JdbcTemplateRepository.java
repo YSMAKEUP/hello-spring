@@ -18,9 +18,10 @@ import java.util.Optional;
 public class JdbcTemplateMemberRepository implements MemberRepository {
 
     private final JdbcTemplate jdbcTemplate; //jdbc를 만들기 위해서 접근제어 방식을 설정
+    private SimpleJdbcInsert jdbcInsert;
 
     public JdbcTemplateMemberRepository(DataSource dataSource) {
-        jdbcTemplate = new JdbcTemplate(dataSource);//
+        jdbcTemplate = new JdbcTemplate(dataSource);
     }
 
     @Override

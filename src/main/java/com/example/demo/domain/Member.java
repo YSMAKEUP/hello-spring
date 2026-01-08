@@ -1,9 +1,15 @@
 package com.example.demo.domain;
 
+
+import jakarta.persistence.Entity;
+import jakarta.persistence.GeneratedValue;
+import jakarta.persistence.GenerationType;
+
+@Entity
 public class Member {
 
 
-     //회원의 id, name이 필요하기 때문에
+    @id @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
     private String name;
 
